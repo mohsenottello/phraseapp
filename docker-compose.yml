@@ -1,0 +1,52 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "phraseapp"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/phraseapp
+    networks:
+      - phraseapp_net
+    ports:
+      - "3000:3000"
+    links:
+      - sidekiq
+      - postgres
+      - redis
+    environment:
+      - RAILS_ENV=development
+  sidekiq:
+    build: .
+    command: bundle exe sidekiq -C config/sidekiq.yml
+    container_name: "phraseapp_sidekiq"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/phraseapp
+    networks:
+      - phraseapp_net
+    links:
+      - postgres
+      - redis
+  postgres:
+    image: camptocamp/postgres:9.6
+    container_name: "phraseapp_postgres"
+    networks:
+      - phraseapp_net
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    container_name: "phraseapp_redis"
+    networks:
+      - phraseapp_net
+    ports:
+      - "6379:6379"
+volumes:
+  phraseapp_vol:
+networks:
+  phraseapp_net:

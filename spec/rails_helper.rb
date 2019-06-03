@@ -58,4 +58,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.global_fixtures = :all
+  # This will pick up all of the fixtures defined in spec/fixtures into your
+  # database and you’ll be able to test with some sample data
+  # (eg. Countries, States, etc.)
 end

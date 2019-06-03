@@ -1,12 +1,16 @@
-<%= render partial: 'shared/show', locals: { instance_object: instance_object } %>
+<% cache ['articles/show', instance_object] do %>
+  <%= render partial: 'shared/show', locals: { instance_object: instance_object } %>
 
-<h4>Questions:</h4>
+  <h4>Questions:</h4>
 
-<% instance_object.questions.each_with_index do |question, index|%>
-  <p>
-    question <%= index %>:
-    <%= render partial: 'questions/show', locals: { instance_object: question } %>
-  </p>
+  <% cache ['articles/questions', instance_object] do %>
+    <% instance_object.questions.each_with_index do |question, index|%>
+      <p>
+        question <%= index %>:
+        <%= render partial: 'questions/show', locals: { instance_object: question } %>
+      </p>
+    <% end %>
+  <% end %>
+  <h4>Add a Question</h4>
+  <%= render partial: 'shared/form', locals: { instance_object: Question.new(article: instance_object) } %>
 <% end %>
-<h4>Add a Question</h4>
-<%= render partial: 'shared/form', locals: { instance_object: Question.new(article: instance_object) } %>

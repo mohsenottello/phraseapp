@@ -1,11 +1,13 @@
-<%= render partial: 'shared/show', locals: { instance_object: instance_object } %>
+<% cache ['questions/show', instance_object] do %>
+  <%= render partial: 'shared/show', locals: { instance_object: instance_object } %>
 
-<% if instance_object.answer %>
-  <p>
-    <%= render partial: 'shared/show', locals: { instance_object: instance_object.answer } %>
-  </p>
-<% else %>
-  <p>
-    <%= render partial: 'shared/form', locals: { instance_object: Answer.new(question: instance_object) } %>
-  </p>
+  <% if instance_object.answer %>
+    <p>
+      <%= render partial: 'shared/show', locals: { instance_object: instance_object.answer } %>
+    </p>
+  <% else %>
+    <p>
+      <%= render partial: 'shared/form', locals: { instance_object: Answer.new(question: instance_object) } %>
+    </p>
+  <% end %>
 <% end %>

@@ -1,11 +1,13 @@
-<p>
-  <strong>Description:</strong>
-  <%= instance_object.description %>
-</p>
+<% cache ['shared_show', instance_object] do %>
+  <p>
+    <strong>Description:</strong>
+    <%= instance_object.description %>
+  </p>
 
-<p>
-  <strong>German Description:</strong>
-  <%= instance_object.description_de %>
-</p>
+  <p>
+    <strong>German Description:</strong>
+    <%= instance_object.description_de %>
+  </p>
 
-<%= render partial: 'shared/links', locals: { instance_object: instance_object } %>
+  <%= render partial: 'shared/links', locals: { instance_object: instance_object } %>
+<% end %>

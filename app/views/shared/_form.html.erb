@@ -1,0 +1,16 @@
+<h1><%= "#{instance_object.new_record? ? "New" : "Update"} #{instance_object.class.name}" %></h1>
+<%= form_with model: instance_object do |form| %>
+  <p>
+    <%= form.hidden_field :parent_id %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+<% if instance_object.class.name != "Article"%>
+  <%= link_to "Back", Article %>
+<% end %>

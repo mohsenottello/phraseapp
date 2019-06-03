@@ -1,0 +1,9 @@
+question_1:
+  description: test
+  content_type: 2
+  article: article_1
+
+question_2:
+  description: test_2
+  content_type: 2
+  article: article_1

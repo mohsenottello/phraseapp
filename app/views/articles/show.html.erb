@@ -1,0 +1,12 @@
+<%= render partial: 'shared/show', locals: { instance_object: instance_object } %>
+
+<h4>Questions:</h4>
+
+<% instance_object.questions.each_with_index do |question, index|%>
+  <p>
+    question <%= index %>:
+    <%= render partial: 'questions/show', locals: { instance_object: question } %>
+  </p>
+<% end %>
+<h4>Add a Question</h4>
+<%= render partial: 'shared/form', locals: { instance_object: Question.new(article: instance_object) } %>

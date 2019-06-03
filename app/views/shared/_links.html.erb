@@ -1,0 +1,5 @@
+<%= link_to 'Edit', [:edit, instance_object] %>
+<% if instance_object.class.name != "Article"%>
+  <%= link_to "Back", Article %>
+<% end %>
+<%= link_to "Destroy", instance_object, method: :delete, data: {confirm: "Are you sure?"} %>
